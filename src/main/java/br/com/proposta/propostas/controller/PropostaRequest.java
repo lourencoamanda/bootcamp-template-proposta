@@ -1,6 +1,6 @@
-package br.com.proposta.propostas;
+package br.com.proposta.propostas.controller;
 
-import br.com.proposta.entity.Proposta;
+import br.com.proposta.propostas.entity.Proposta;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 import org.springframework.util.Assert;

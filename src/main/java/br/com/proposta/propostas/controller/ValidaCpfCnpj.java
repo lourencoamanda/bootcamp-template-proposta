@@ -1,11 +1,14 @@
-package br.com.proposta.propostas;
+package br.com.proposta.propostas.controller;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @Component
-class ValidaCpfCnpj implements Validator {
+public class ValidaCpfCnpj implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {

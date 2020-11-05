@@ -1,5 +1,7 @@
 package br.com.proposta.propostas.controller;
 
+import br.com.proposta.propostas.service.StatusAvaliacaoProposta;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -28,13 +30,17 @@ public class PropostaCriada {
     @Positive
     private BigDecimal salario;
 
-    public PropostaCriada(@NotBlank Long id, @NotBlank String cpfCnpj, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco, @NotNull @Positive BigDecimal salario) {
+    private StatusAvaliacaoProposta statusAvaliacaoProposta;
+
+
+    public PropostaCriada(@NotBlank Long id, @NotBlank String cpfCnpj, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco, @NotNull @Positive BigDecimal salario, StatusAvaliacaoProposta statusAvaliacaoProposta) {
         this.id = id;
         this.cpfCnpj = cpfCnpj;
         this.email = email;
         this.nome = nome;
         this.endereco = endereco;
         this.salario = salario;
+        this.statusAvaliacaoProposta = statusAvaliacaoProposta;
     }
 
     public Long getId() {
@@ -59,5 +65,9 @@ public class PropostaCriada {
 
     public BigDecimal getSalario() {
         return salario;
+    }
+
+    public StatusAvaliacaoProposta getStatusAvaliacaoProposta() {
+        return statusAvaliacaoProposta;
     }
 }

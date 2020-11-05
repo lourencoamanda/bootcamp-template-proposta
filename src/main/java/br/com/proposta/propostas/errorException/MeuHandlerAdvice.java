@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.*;
+
 @RestControllerAdvice
 public class MeuHandlerAdvice {
 
@@ -23,13 +25,12 @@ public class MeuHandlerAdvice {
         fieldErrors.forEach(fieldError -> {
             String message = String.format("Campo %s %s", fieldError.getField(), fieldError.getDefaultMessage());
             mensagens.add(message);
+
         });
 
         ErroPadronizado erroPadronizado = new ErroPadronizado(mensagens);
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erroPadronizado);
-
-
+        return status(HttpStatus.BAD_REQUEST).body(erroPadronizado);
 
     }
 }

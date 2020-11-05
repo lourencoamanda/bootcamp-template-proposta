@@ -1,9 +1,9 @@
 package br.com.proposta.propostas.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import br.com.proposta.propostas.service.AnalisePropostaRequest;
+import br.com.proposta.propostas.service.StatusAvaliacaoProposta;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -36,16 +36,21 @@ public class Proposta implements Serializable {
     @Positive
     private BigDecimal salario;
 
+    private StatusAvaliacaoProposta statusAvaliacaoProposta;
+
+    private String cartao;
+
     @Deprecated
     public Proposta(){
     }
 
-    public Proposta(@NotBlank String cpfCnpj, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco, @NotNull @Positive BigDecimal salario) {
+    public Proposta(@NotBlank String cpfCnpj, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco, @NotNull @Positive BigDecimal salario, StatusAvaliacaoProposta statusAvaliacaoProposta) {
         this.cpfCnpj = cpfCnpj;
         this.email = email;
         this.nome = nome;
         this.endereco = endereco;
         this.salario = salario;
+        this.statusAvaliacaoProposta = statusAvaliacaoProposta;
     }
 
     public Long getId() {
@@ -95,4 +100,38 @@ public class Proposta implements Serializable {
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
     }
+
+    public StatusAvaliacaoProposta getStatusAvaliacaoProposta() {
+        return statusAvaliacaoProposta;
+    }
+
+    public String getCartao() {
+        return cartao;
+    }
+    public void setCartao(String cartao) {
+        this.cartao = cartao;
+    }
+
+    public void setStatusAvaliacaoProposta(StatusAvaliacaoProposta statusAvaliacaoProposta) {
+        this.statusAvaliacaoProposta = statusAvaliacaoProposta;
+    }
+
+    @Override
+    public String toString() {
+        return "Proposta{" +
+                "id=" + id +
+                ", cpfCnpj='" + cpfCnpj + '\'' +
+                ", email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", salario=" + salario +
+                ", statusAvaliacaoProposta=" + statusAvaliacaoProposta +
+                ", cartao='" + cartao + '\'' +
+                '}';
+    }
+
+    public AnalisePropostaRequest toAnalisePropostaRequest() {
+        return new AnalisePropostaRequest(this.cpfCnpj, this.nome, this.id);
+    }
+
 }

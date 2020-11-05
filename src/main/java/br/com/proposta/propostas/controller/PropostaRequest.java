@@ -31,6 +31,8 @@ public class PropostaRequest {
     @Positive
     private BigDecimal salario;
 
+    private String Status;
+
     @Deprecated
     public PropostaRequest(){
     }
@@ -83,10 +85,12 @@ public class PropostaRequest {
         this.salario = salario;
     }
 
-    public Proposta toModel(EntityManager manager){
+    public String getStatus() {
+        return Status;
+    }
 
-        return new Proposta(cpfCnpj,email,nome,endereco,salario);
-
+    public void setStatus(String status) {
+        Status = status;
     }
 
     public boolean validaCpfCpnj() {
@@ -100,5 +104,17 @@ public class PropostaRequest {
 
         return cpfValidator.isValid(this.cpfCnpj, null)
                 || cnpjValidator.isValid(this.cpfCnpj, null);
+    }
+
+    @Override
+    public String toString() {
+        return "PropostaRequest{" +
+                "cpfCnpj='" + cpfCnpj + '\'' +
+                ", email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", salario=" + salario +
+                ", Status='" + Status + '\'' +
+                '}';
     }
 }
